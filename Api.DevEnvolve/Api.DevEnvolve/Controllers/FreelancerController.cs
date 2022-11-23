@@ -1,4 +1,5 @@
-﻿using Api.DevEnvolve.Repository;
+﻿using Api.DevEnvolve.Model;
+using Api.DevEnvolve.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.DevEnvolve.Controllers
@@ -23,6 +24,27 @@ namespace Api.DevEnvolve.Controllers
                 return StatusCode(404, "Freelancer não encontrado. Verifique se o freelancer existe na base de dados"); ;
             }
             return Ok(freelancer);
+        }
+
+        [HttpPost("AddFreelancer")]
+        public async Task<IActionResult> AddFreelancer([FromBody] Freelancer freelancer)
+        {
+            FreelancerRepository.AddFreelancer(freelancer);
+            return Ok();
+        }
+
+        [HttpPut("AtualizarFreelancer/{idFreelancer}")]
+        public async Task<IActionResult> UpdateFreelancer([FromBody] Freelancer freelancer, int idFreelancer)
+        {
+            FreelancerRepository.UpdateFreelancer(freelancer, idFreelancer);
+            return Ok();
+        }
+
+        [HttpDelete("DeletarFreelancer/{idFreelancer}")]
+        public async Task<IActionResult> DeletarFreelancer(int idFreelancer)
+        {
+            FreelancerRepository.DeleteFreelancer(idFreelancer);
+            return Ok();
         }
     }
 }
