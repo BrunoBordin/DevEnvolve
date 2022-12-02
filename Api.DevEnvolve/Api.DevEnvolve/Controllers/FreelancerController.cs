@@ -26,13 +26,6 @@ namespace Api.DevEnvolve.Controllers
             return Ok(freelancer);
         }
 
-        [HttpPost("AddFreelancer")]
-        public async Task<IActionResult> AddFreelancer([FromBody] Freelancer freelancer)
-        {
-            FreelancerRepository.AddFreelancer(freelancer);
-            return Ok();
-        }
-
         [HttpPut("AtualizarFreelancer/{idFreelancer}")]
         public async Task<IActionResult> UpdateFreelancer([FromBody] Freelancer freelancer, int idFreelancer)
         {

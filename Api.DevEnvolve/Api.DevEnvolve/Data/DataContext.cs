@@ -6,6 +6,8 @@ namespace Api.DevEnvolve.Data
     public class DataContext : DbContext
     {
         public virtual DbSet<Freelancer> Feelancer { get; set; }
+        public virtual DbSet<Empresa> Empresa { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,6 +24,8 @@ namespace Api.DevEnvolve.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Freelancer>(x => x.ToTable("Freelancer"));
+            modelBuilder.Entity<Empresa>(x => x.ToTable("Empresa"));
+            modelBuilder.Entity<Usuario>(x => x.HasNoKey());
         }
     }
 }

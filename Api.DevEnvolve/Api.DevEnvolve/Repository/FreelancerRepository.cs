@@ -41,39 +41,6 @@ namespace Api.DevEnvolve.Repository
             }
         }
 
-        public static void AddFreelancer(Freelancer freelancer)
-        {
-            try
-            {
-                var encod = new DefaultSGUPasswordEncoderHandler();
-
-                var senhaCripto = encod.encodePlainPassword(encod.plainPassword(freelancer.email, freelancer.senha));
-
-                Freelancer freela = new Freelancer
-                {
-                    nome = freelancer.nome,
-                    email = freelancer.email,
-                    senha = senhaCripto,
-                    telefone = freelancer.telefone,
-                    celular = Extension.RemoveNonNumeric(freelancer.celular),
-                    cpfCnpj = Extension.RemoveNonNumeric(freelancer.cpfCnpj),
-                    cidade = freelancer.cidade,
-                    estado = freelancer.estado.ToUpper(),
-                    sobre = freelancer.sobre,
-                    saldo = 0,
-                };
-                using (var dbContext = new DataContext())
-                {
-                    dbContext.Feelancer.Add(freela);
-                    dbContext.SaveChanges();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         public static void UpdateFreelancer(Freelancer freelancer, int idFreelancer)
         {
             try
@@ -84,11 +51,6 @@ namespace Api.DevEnvolve.Repository
 
                     freeler.nome = freelancer.nome;
                     freeler.email = freelancer.email;
-                    freeler.telefone = freelancer.telefone;
-                    freeler.celular = freelancer.celular;
-                    freeler.cidade = freelancer.cidade;
-                    freeler.estado = freelancer.estado;
-                    freeler.sobre = freelancer.sobre;
 
                     dbContext.Update(freeler);
                     dbContext.SaveChanges();

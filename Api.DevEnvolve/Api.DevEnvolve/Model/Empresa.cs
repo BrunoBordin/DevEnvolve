@@ -2,10 +2,10 @@
 
 namespace Api.DevEnvolve.Model
 {
-    public class Freelancer
+    public class Empresa
     {
         [Key]
-        public int? idFreelancer { get; set; }
+        public int? idEmpresa { get; set; }
 
         public string nome { get; set; }
         public string email { get; set; }
