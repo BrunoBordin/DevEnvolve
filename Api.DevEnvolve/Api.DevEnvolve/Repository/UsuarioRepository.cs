@@ -23,11 +23,6 @@ namespace Api.DevEnvolve.Repository
                         senha = senhaCripto,
                         celular = Extension.RemoveNonNumeric(usuario.celular),
                     };
-
-                    Endereco endereco = new()
-                    {
-                        cidade = usuario.cida
-                    }
                     using (var dbContext = new DataContext())
                     {
                         dbContext.Feelancer.Add(userFreelancer);
