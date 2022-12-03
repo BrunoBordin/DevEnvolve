@@ -31,7 +31,7 @@ namespace Api.DevEnvolve.Repository
                     var empresa = dbContext.Empresa.AsQueryable().Where(x => x.nome.Contains(nomeEmpresa)).FirstOrDefault();
 
                     return empresa;
-                }
+                };
             }
             catch (Exception ex)
             {

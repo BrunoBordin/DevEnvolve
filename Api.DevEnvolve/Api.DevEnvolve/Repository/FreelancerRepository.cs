@@ -31,7 +31,7 @@ namespace Api.DevEnvolve.Repository
                     var freelancer = dbContext.Feelancer.AsQueryable().Where(x => x.nome.Contains(nomeFreelancer)).FirstOrDefault();
 
                     return freelancer;
-                }
+                };
             }
             catch (Exception ex)
             {
