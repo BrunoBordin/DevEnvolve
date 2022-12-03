@@ -38,5 +38,30 @@ namespace Api.DevEnvolve.Controllers
             EmpresaRepository.DeleteEmpresa(idEmpresa);
             return Ok();
         }
+
+        [HttpPatch("SenhaEmpresa/{idEmpresa}")]
+        public async Task<IActionResult> Senha(int idEmpresa, string senha)
+        {
+            int alteraSenha = EmpresaRepository.AlteraSenha(idEmpresa, senha);
+            if (alteraSenha == 0)
+            {
+                return Ok();
+            }
+            else if (alteraSenha == 1)
+            {
+                return StatusCode(400, "Senha nova deve ser diferente da senha atual!");
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        [HttpPatch("FotoPerfilEmpresa/{idEmpresa}")]
+        public async Task<IActionResult> FotoPerfil(int idEmpresa, string foto)
+        {
+            EmpresaRepository.AlteraFotoPerfil(foto, idEmpresa);
+            return Ok();
+        }
     }
 }

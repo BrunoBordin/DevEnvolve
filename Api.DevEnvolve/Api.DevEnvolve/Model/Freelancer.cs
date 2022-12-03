@@ -14,5 +14,6 @@ namespace Api.DevEnvolve.Model
         public byte? foto { get; set; }
         public int? reputacao { get; set; }
         public string? descricao { get; set; }
+        public decimal? saldo { get; set; }
     }
 }

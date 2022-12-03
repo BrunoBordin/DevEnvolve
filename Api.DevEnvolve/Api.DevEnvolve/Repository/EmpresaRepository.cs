@@ -1,5 +1,6 @@
 ﻿using Api.DevEnvolve.Data;
 using Api.DevEnvolve.Model;
+using static Api.DevEnvolve.Helper.Extension;
 
 namespace Api.DevEnvolve.Repository
 {
@@ -45,12 +46,12 @@ namespace Api.DevEnvolve.Repository
             {
                 using (var dbContext = new DataContext())
                 {
-                    Empresa freeler = dbContext.Empresa.AsQueryable().Where(x => x.idEmpresa == idEmpresa).FirstOrDefault();
+                    Empresa empr = dbContext.Empresa.AsQueryable().Where(x => x.idEmpresa == idEmpresa).FirstOrDefault();
 
-                    freeler.nome = empresa.nome;
-                    freeler.email = empresa.email;
+                    empr.nome = empresa.nome;
+                    empr.email = empresa.email;
 
-                    dbContext.Update(freeler);
+                    dbContext.Update(empr);
                     dbContext.SaveChanges();
                 }
             }
@@ -66,10 +67,14 @@ namespace Api.DevEnvolve.Repository
             {
                 using (var dbContext = new DataContext())
                 {
-                    Empresa empresa = dbContext.Empresa.AsQueryable().Where(x => x.idEmpresa == idEmpresa).FirstOrDefault();
-                    dbContext.Remove(empresa);
-                    EnderecoEmpresa endereco = dbContext.EnderecoEmpresa.AsQueryable().Where(x => x.idEmpresa == idEmpresa).FirstOrDefault();
-                    dbContext.Remove(endereco);
+                    Empresa? empresa = dbContext.Empresa.AsQueryable().Where(x => x.idEmpresa == idEmpresa).FirstOrDefault();
+
+                    if (empresa != null)
+                    {
+                        dbContext.Remove(empresa);
+                        EnderecoEmpresa endereco = dbContext.EnderecoEmpresa.AsQueryable().Where(x => x.idEmpresa == empresa.idEmpresa).FirstOrDefault();
+                        dbContext.Remove(endereco);
+                    }
                     dbContext.SaveChanges();
                 }
             }
@@ -77,6 +82,41 @@ namespace Api.DevEnvolve.Repository
             {
                 throw ex;
             }
+        }
+
+        public static int AlteraSenha(int idEmpresa, string senha)
+        {
+            try
+            {
+                using (var dbContext = new DataContext())
+                {
+                    Empresa? empresa = dbContext.Empresa.AsQueryable().Where(x => x.idEmpresa == idEmpresa).FirstOrDefault();
+
+                    if (empresa != null)
+                    {
+                        var encod = new DefaultSGUPasswordEncoderHandler();
+                        var senhaCripto = encod.encodePlainPassword(encod.plainPassword(empresa.email, senha));
+                        if (senhaCripto != empresa.senha)
+                        {
+                            empresa.senha = senhaCripto;
+                            dbContext.Update(empresa);
+                            dbContext.SaveChanges();
+                            return 0;
+                        }
+                        else return 1;
+                    }
+                    return 2;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        internal static void AlteraFotoPerfil(string foto, int idFreelancer)
+        {
+            throw new NotImplementedException();
         }
     }
 }
