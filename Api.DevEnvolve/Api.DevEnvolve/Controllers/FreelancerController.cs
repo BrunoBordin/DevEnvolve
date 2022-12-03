@@ -15,10 +15,10 @@ namespace Api.DevEnvolve.Controllers
             return Ok(freelancers);
         }
 
-        [HttpGet("Freelancer/{idFreelancer}")]
-        public async Task<IActionResult> GetFreelancerById(int idFreelancer)
+        [HttpGet("PesquisaFreelancer")]
+        public async Task<IActionResult> GetFreelancerById(string nomeFreelancer)
         {
-            var freelancer = FreelancerRepository.GetFreelancerById(idFreelancer);
+            var freelancer = FreelancerRepository.GetFreelancerByName(nomeFreelancer);
             if (freelancer == null)
             {
                 return StatusCode(404, "Freelancer não encontrado. Verifique se o freelancer existe na base de dados"); ;

@@ -1,7 +1,5 @@
 ﻿using Api.DevEnvolve.Data;
-using Api.DevEnvolve.Helper;
 using Api.DevEnvolve.Model;
-using static Api.DevEnvolve.Helper.Extension;
 
 namespace Api.DevEnvolve.Repository
 {
@@ -24,13 +22,13 @@ namespace Api.DevEnvolve.Repository
             }
         }
 
-        public static Freelancer GetFreelancerById(int idFreelancer)
+        public static Freelancer GetFreelancerByName(string nomeFreelancer)
         {
             try
             {
                 using (var dbContext = new DataContext())
                 {
-                    var freelancer = dbContext.Feelancer.AsQueryable().Where(x => x.idFreelancer == idFreelancer).FirstOrDefault();
+                    var freelancer = dbContext.Feelancer.AsQueryable().Where(x => x.nome.Contains(nomeFreelancer)).FirstOrDefault();
 
                     return freelancer;
                 }
@@ -70,6 +68,9 @@ namespace Api.DevEnvolve.Repository
                 {
                     Freelancer freeler = dbContext.Feelancer.AsQueryable().Where(x => x.idFreelancer == idFreelancer).FirstOrDefault();
                     dbContext.Remove(freeler);
+                    EnderecoFreelancer endereco = dbContext.EnderecoFreelancer.AsQueryable().Where(x => x.idFreelancer == idFreelancer).FirstOrDefault();
+                    if (endereco != null)
+                        dbContext.Remove(endereco);
                     dbContext.SaveChanges();
                 }
             }

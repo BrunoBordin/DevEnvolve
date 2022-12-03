@@ -28,7 +28,20 @@ namespace Api.DevEnvolve.Repository
                         dbContext.Feelancer.Add(userFreelancer);
                         dbContext.SaveChanges();
                         userFreelancer.idFreelancer = userFreelancer.idFreelancer;
-
+                    }
+                    EnderecoFreelancer enderecoFreelancer = new EnderecoFreelancer()
+                    {
+                        idFreelancer = userFreelancer.idFreelancer.Value,
+                        cidade = usuario.cidade,
+                        estado = usuario.estado,
+                        cep = usuario.cep,
+                        logradouro = usuario.logradouro,
+                        numero = usuario.numero
+                    };
+                    using (var dbContext = new DataContext())
+                    {
+                        dbContext.EnderecoFreelancer.Add(enderecoFreelancer);
+                        dbContext.SaveChanges();
                     }
                 }
                 else
@@ -47,6 +60,21 @@ namespace Api.DevEnvolve.Repository
                     using (var dbContext = new DataContext())
                     {
                         dbContext.Empresa.Add(userEmpresa);
+                        dbContext.SaveChanges();
+                        userEmpresa.idEmpresa = userEmpresa.idEmpresa.Value;
+                    }
+                    EnderecoEmpresa enderecoEmpresa = new EnderecoEmpresa()
+                    {
+                        idEmpresa = userEmpresa.idEmpresa.Value,
+                        cidade = usuario.cidade,
+                        estado = usuario.estado,
+                        cep = usuario.cep,
+                        logradouro = usuario.logradouro,
+                        numero = usuario.numero
+                    };
+                    using (var dbContext = new DataContext())
+                    {
+                        dbContext.EnderecoEmpresa.Add(enderecoEmpresa);
                         dbContext.SaveChanges();
                     }
                 }

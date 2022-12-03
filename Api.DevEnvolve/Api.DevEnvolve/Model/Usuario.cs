@@ -7,12 +7,6 @@
         public string senha { get; set; }
         public string celular { get; set; }
         public string tipo { get; set; }
-        public Endereco endereco { get; set; }
-    }
-
-    public class Endereco
-    {
-        public int idFreelancer { get; set; }
         public string cidade { get; set; }
         public string estado { get; set; }
         public string cep { get; set; }
