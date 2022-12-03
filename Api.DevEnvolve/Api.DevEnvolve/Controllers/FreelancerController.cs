@@ -21,7 +21,7 @@ namespace Api.DevEnvolve.Controllers
             var freelancer = FreelancerRepository.GetFreelancerByName(nomeFreelancer);
             if (freelancer == null)
             {
-                return StatusCode(404, "Freelancer não encontrado. Verifique se o freelancer existe na base de dados"); ;
+                return StatusCode(404, "Freelancer não encontrado. Verifique se o freelancer existe na base de dados");
             }
             return Ok(freelancer);
         }
@@ -37,6 +37,38 @@ namespace Api.DevEnvolve.Controllers
         public async Task<IActionResult> DeletarFreelancer(int idFreelancer)
         {
             FreelancerRepository.DeleteFreelancer(idFreelancer);
+            return Ok();
+        }
+
+        [HttpPatch("ReputacaoFreela/{idFreelancer}")]
+        public async Task<IActionResult> Reputacao(int idFreelancer, int reputacao)
+        {
+            FreelancerRepository.Reputacao(reputacao, idFreelancer);
+            return Ok();
+        }
+
+        [HttpPatch("SenhaFreela/{idFreelancer}")]
+        public async Task<IActionResult> Senha(int idFreelancer, string senha)
+        {
+            int alteraSenha = FreelancerRepository.AlteraSenha(idFreelancer, senha);
+            if (alteraSenha == 0)
+            {
+                return Ok();
+            }
+            else if (alteraSenha == 1)
+            {
+                return StatusCode(400, "Senha nova deve ser diferente da senha atual!");
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        [HttpPatch("FotoPerfilFreela/{idFreelancer}")]
+        public async Task<IActionResult> FotoPerfil(int idFreelancer, string foto)
+        {
+            FreelancerRepository.AlteraFotoPerfil(foto, idFreelancer);
             return Ok();
         }
     }

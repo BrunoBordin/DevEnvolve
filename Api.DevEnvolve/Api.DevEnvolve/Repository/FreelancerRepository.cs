@@ -1,5 +1,6 @@
 ﻿using Api.DevEnvolve.Data;
 using Api.DevEnvolve.Model;
+using static Api.DevEnvolve.Helper.Extension;
 
 namespace Api.DevEnvolve.Repository
 {
@@ -66,11 +67,13 @@ namespace Api.DevEnvolve.Repository
             {
                 using (var dbContext = new DataContext())
                 {
-                    Freelancer freeler = dbContext.Feelancer.AsQueryable().Where(x => x.idFreelancer == idFreelancer).FirstOrDefault();
-                    dbContext.Remove(freeler);
-                    EnderecoFreelancer endereco = dbContext.EnderecoFreelancer.AsQueryable().Where(x => x.idFreelancer == idFreelancer).FirstOrDefault();
-                    if (endereco != null)
+                    Freelancer? freeler = dbContext.Feelancer.AsQueryable().Where(x => x.idFreelancer == idFreelancer).FirstOrDefault();
+                    if (freeler != null)
+                    {
+                        dbContext.Remove(freeler);
+                        EnderecoFreelancer endereco = dbContext.EnderecoFreelancer.AsQueryable().Where(x => x.idFreelancer == freeler.idFreelancer).FirstOrDefault();
                         dbContext.Remove(endereco);
+                    }
                     dbContext.SaveChanges();
                 }
             }
@@ -78,6 +81,62 @@ namespace Api.DevEnvolve.Repository
             {
                 throw ex;
             }
+        }
+
+        public static void Reputacao(int reputacao, int idFreelancer)
+        {
+            try
+            {
+                using (var dbContext = new DataContext())
+                {
+                    Freelancer? freeler = dbContext.Feelancer.AsQueryable().Where(x => x.idFreelancer == idFreelancer).FirstOrDefault();
+                    if (freeler!= null)
+                    {
+                        freeler.reputacao= reputacao;
+                        dbContext.Update(freeler);
+                        dbContext.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static int AlteraSenha(int idFreelancer, string senha)
+        {
+            try
+            {
+                using (var dbContext = new DataContext())
+                {
+                    Freelancer? freelancer = dbContext.Feelancer.AsQueryable().Where(x => x.idFreelancer == idFreelancer).FirstOrDefault();
+
+                    if (freelancer != null)
+                    {
+                        var encod = new DefaultSGUPasswordEncoderHandler();
+                        var senhaCripto = encod.encodePlainPassword(encod.plainPassword(freelancer.email, senha));
+                        if (senhaCripto != freelancer.senha)
+                        {
+                            freelancer.senha = senhaCripto;
+                            dbContext.Update(freelancer);
+                            dbContext.SaveChanges();
+                            return 0;
+                        }
+                        else return 1;
+                    }
+                    return 2;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void AlteraFotoPerfil(string foto, int idFreelancer)
+        {
+            throw new NotImplementedException();
         }
     }
 }
