@@ -5,7 +5,7 @@ namespace Api.DevEnvolve.Repository
 {
     public class EmpresaRepository
     {
-        public static List<Empresa> GetFreelancers()
+        public static List<Empresa> GetEmpresas()
         {
             try
             {
@@ -22,7 +22,7 @@ namespace Api.DevEnvolve.Repository
             }
         }
 
-        public static Empresa GetFreelancerByName(string nomeEmpresa)
+        public static Empresa GetEmpresaByName(string nomeEmpresa)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Api.DevEnvolve.Repository
             }
         }
 
-        public static void UpdateFreelancer(Empresa empresa, int idEmpresa)
+        public static void UpdateEmpresa(Empresa empresa, int idEmpresa)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace Api.DevEnvolve.Repository
             }
         }
 
-        public static void DeleteFreelancer(int idEmpresa)
+        public static void DeleteEmpresa(int idEmpresa)
         {
             try
             {

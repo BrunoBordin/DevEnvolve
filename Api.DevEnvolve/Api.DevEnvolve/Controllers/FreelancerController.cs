@@ -16,7 +16,7 @@ namespace Api.DevEnvolve.Controllers
         }
 
         [HttpGet("PesquisaFreelancer")]
-        public async Task<IActionResult> GetFreelancerById(string nomeFreelancer)
+        public async Task<IActionResult> GetFreelancerByName(string nomeFreelancer)
         {
             var freelancer = FreelancerRepository.GetFreelancerByName(nomeFreelancer);
             if (freelancer == null)
