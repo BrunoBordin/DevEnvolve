@@ -114,8 +114,37 @@ namespace Api.DevEnvolve.Repository
             }
         }
 
-        internal static void AlteraFotoPerfil(string foto, int idFreelancer)
+        public static void AlteraFotoPerfil(string foto, int idFreelancer)
         {
+            throw new NotImplementedException();
+        }
+
+        public static UsuarioToken GetEmpresaByLogin(string email, string senha)
+        {
+            try
+            {
+                using (var dbContext = new DataContext())
+                {
+                    var encod = new DefaultSGUPasswordEncoderHandler();
+                    var senhaCripto = encod.encodePlainPassword(encod.plainPassword(email, senha));
+
+                    Empresa? empresa = dbContext.Empresa.AsQueryable().Where(x => x.email == email && x.senha == senha).FirstOrDefault();
+                    if (empresa != null)
+                    {
+                        UsuarioToken usuarioToken = new UsuarioToken()
+                        {
+                            id = empresa.idEmpresa,
+                            email = empresa.email,
+                            senha = empresa.senha
+                        };
+                    }
+                    else return null;
+                };
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             throw new NotImplementedException();
         }
     }

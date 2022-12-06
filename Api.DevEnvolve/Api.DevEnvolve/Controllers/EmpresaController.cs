@@ -1,11 +1,14 @@
-﻿using Api.DevEnvolve.Model;
+﻿using Api.DevEnvolve.Helper;
+using Api.DevEnvolve.Model;
 using Api.DevEnvolve.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.DevEnvolve.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize()]
     public class EmpresaController : ControllerBase
     {
         [HttpGet("GetEmpresas")]
@@ -61,6 +64,13 @@ namespace Api.DevEnvolve.Controllers
         public async Task<IActionResult> FotoPerfil(int idEmpresa, string foto)
         {
             EmpresaRepository.AlteraFotoPerfil(foto, idEmpresa);
+            return Ok();
+        }
+
+        [HttpPost("CadastraDemanda")]
+        public async Task<IActionResult> CadastraDemanda()
+        {
+            var id = User.Identity.GetPrestadorId();
             return Ok();
         }
     }

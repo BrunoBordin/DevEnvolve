@@ -10,6 +10,7 @@ namespace Api.DevEnvolve.Data
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<EnderecoEmpresa> EnderecoEmpresa { get; set; }
         public virtual DbSet<EnderecoFreelancer> EnderecoFreelancer { get; set; }
+        public virtual DbSet<UsuarioToken> UsuarioToken { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,6 +31,7 @@ namespace Api.DevEnvolve.Data
             modelBuilder.Entity<EnderecoEmpresa>(x => x.ToTable("EnderecoEmpresa"));
             modelBuilder.Entity<EnderecoFreelancer>(x => x.ToTable("EnderecoFreelancer"));
             modelBuilder.Entity<Usuario>(x => x.HasNoKey());
+            modelBuilder.Entity<UsuarioToken>(x => x.HasNoKey());
         }
     }
 }
