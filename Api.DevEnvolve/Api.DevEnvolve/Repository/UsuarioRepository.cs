@@ -21,22 +21,21 @@ namespace Api.DevEnvolve.Repository
                         nome = usuario.nome,
                         email = usuario.email,
                         senha = senhaCripto,
-                        celular = Extension.RemoveNonNumeric(usuario.celular),
+                        celular = Extension.RemoveNonNumeric(usuario.celular)
                     };
                     using (var dbContext = new DataContext())
                     {
                         dbContext.Feelancer.Add(userFreelancer);
                         dbContext.SaveChanges();
-                        userFreelancer.idFreelancer = userFreelancer.idFreelancer;
                     }
                     EnderecoFreelancer enderecoFreelancer = new EnderecoFreelancer()
                     {
-                        idFreelancer = userFreelancer.idFreelancer.Value,
+                        idFreelancer = userFreelancer.idFreelancer,
                         cidade = usuario.cidade,
                         estado = usuario.estado,
                         cep = usuario.cep,
                         logradouro = usuario.logradouro,
-                        numero = usuario.numero
+                        numero = usuario.numero,
                     };
                     using (var dbContext = new DataContext())
                     {
@@ -54,23 +53,21 @@ namespace Api.DevEnvolve.Repository
                         nome = usuario.nome,
                         email = usuario.email,
                         senha = senhaCripto,
-                        celular = Extension.RemoveNonNumeric(usuario.celular),
+                        celular = Extension.RemoveNonNumeric(usuario.celular)
                     };
-
                     using (var dbContext = new DataContext())
                     {
                         dbContext.Empresa.Add(userEmpresa);
                         dbContext.SaveChanges();
-                        userEmpresa.idEmpresa = userEmpresa.idEmpresa.Value;
                     }
                     EnderecoEmpresa enderecoEmpresa = new EnderecoEmpresa()
                     {
-                        idEmpresa = userEmpresa.idEmpresa.Value,
+                        idEmpresa = userEmpresa.idEmpresa,
                         cidade = usuario.cidade,
                         estado = usuario.estado,
                         cep = usuario.cep,
                         logradouro = usuario.logradouro,
-                        numero = usuario.numero
+                        numero = usuario.numero,
                     };
                     using (var dbContext = new DataContext())
                     {
