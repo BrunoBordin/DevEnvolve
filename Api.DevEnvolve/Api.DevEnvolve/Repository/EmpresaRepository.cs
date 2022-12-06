@@ -72,8 +72,8 @@ namespace Api.DevEnvolve.Repository
                     if (empresa != null)
                     {
                         dbContext.Remove(empresa);
-                        EnderecoEmpresa endereco = dbContext.EnderecoEmpresa.AsQueryable().Where(x => x.idEmpresa == empresa.idEmpresa).FirstOrDefault();
-                        dbContext.Remove(endereco);
+                        //EnderecoEmpresa endereco = dbContext.EnderecoEmpresa.AsQueryable().Where(x => x.idEmpresa == empresa.idEmpresa).FirstOrDefault();
+                        //dbContext.Remove(endereco);
                     }
                     dbContext.SaveChanges();
                 }
