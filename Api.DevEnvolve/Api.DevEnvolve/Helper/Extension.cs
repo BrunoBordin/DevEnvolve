@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Security.Claims;
+using System.Security.Principal;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Api.DevEnvolve.Helper
@@ -149,6 +151,18 @@ namespace Api.DevEnvolve.Helper
                 password = password.ToUpper();
                 return (username + password);
             }
+        }
+
+        public static class CustomClaimTypes
+        {
+            public const string id = "id";
+        }
+        public static long GetPrestadorId(this IIdentity identity)
+        {
+            ClaimsIdentity claimsIdentity = identity as ClaimsIdentity;
+            Claim claim = claimsIdentity?.FindFirst(CustomClaimTypes.id);
+            if (claim == null) return 0;
+            return long.Parse(claim.Value);
         }
     }
 }

@@ -40,6 +40,35 @@ namespace Api.DevEnvolve.Repository
             }
         }
 
+        public static UsuarioToken GetFreelancerByLogin(string email, string senha)
+        {
+            try
+            {
+                using (var dbContext = new DataContext())
+                {
+                    var encod = new DefaultSGUPasswordEncoderHandler();
+                    var senhaCripto = encod.encodePlainPassword(encod.plainPassword(email, senha));
+
+                    Freelancer? freelancer = dbContext.Feelancer.AsQueryable().Where(x => x.email == email && x.senha == senhaCripto).FirstOrDefault();
+                    if (freelancer != null)
+                    {
+                        UsuarioToken usuarioToken = new()
+                        {
+                            id = freelancer.idFreelancer,
+                            email = freelancer.email,
+                            senha = freelancer.senha
+                        };
+                        return usuarioToken;
+                    }
+                    else return null;
+                };
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static void UpdateFreelancer(Freelancer freelancer, int idFreelancer)
         {
             try

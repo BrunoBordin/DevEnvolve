@@ -1,11 +1,13 @@
 ﻿using Api.DevEnvolve.Model;
 using Api.DevEnvolve.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.DevEnvolve.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize()]
     public class FreelancerController : ControllerBase
     {
         [HttpGet("Freelancers")]
