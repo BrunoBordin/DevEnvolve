@@ -16,6 +16,7 @@ namespace Api.DevEnvolve.Model
         public string? descricao { get; set; }
         public decimal? saldo { get; set; }
         public EnderecoFreelancer endereco { get; set; }
+        public PlanoFreelancer planoFreelancer { get; set; }
     }
 
     public class EnderecoFreelancer
@@ -28,6 +29,16 @@ namespace Api.DevEnvolve.Model
         public string cep { get; set; }
         public string logradouro { get; set; }
         public int numero { get; set; }
+        public int idFreelancer { get; set; }
+        public Freelancer freelancer { get; set; }
+    }
+
+    public class PlanoFreelancer
+    {
+        [Key]
+        public int idPlanoFreelancer { get; set; }
+
+        public int idPlano { get; set; }
         public int idFreelancer { get; set; }
         public Freelancer freelancer { get; set; }
     }

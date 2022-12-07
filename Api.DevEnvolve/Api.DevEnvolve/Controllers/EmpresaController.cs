@@ -17,6 +17,13 @@ namespace Api.DevEnvolve.Controllers
             return Ok(EmpresaRepository.GetEmpresas());
         }
 
+        [HttpGet("GetDemandasEmpresa")]
+        public async Task<ActionResult<List<Demanda>>> GetDemandasEmpresa()
+        {
+            int id = User.Identity.GetPrestadorId();
+            return Ok(EmpresaRepository.GetDemandasEmpresa(id));
+        }
+
         [HttpGet("PesquisaEmpresa")]
         public async Task<ActionResult<List<Empresa>>> GetEmpresaByName(string nomEmpresa)
         {
@@ -48,10 +55,11 @@ namespace Api.DevEnvolve.Controllers
             EmpresaRepository.DeleteEmpresa(User.Identity.GetPrestadorId());
             return Ok();
         }
+
         [HttpDelete("DeletarDemanda/{idDemanda}")]
         public async Task<IActionResult> DeletarDemanda(int idDemanda)
         {
-            DemandaRepository.DeletarDemanda(User.Identity.GetPrestadorId(),idDemanda);
+            DemandaRepository.DeletarDemanda(User.Identity.GetPrestadorId(), idDemanda);
             return Ok();
         }
 
@@ -81,7 +89,7 @@ namespace Api.DevEnvolve.Controllers
         }
 
         [HttpPost("CadastraDemanda")]
-        public async Task<IActionResult> CadastraDemanda(Demanda demanda)
+        public async Task<IActionResult> CadastraDemanda([FromBody] Demanda demanda)
         {
             int id = User.Identity.GetPrestadorId();
             EmpresaRepository.CadastraDemanda(demanda, id);

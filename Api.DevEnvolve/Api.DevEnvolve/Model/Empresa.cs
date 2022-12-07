@@ -15,6 +15,7 @@ namespace Api.DevEnvolve.Model
         public int? reputacao { get; set; }
         public string? descricao { get; set; }
         public EnderecoEmpresa endereco { get; set; }
+        public PlanoEmpresa planoEmpresa { get; set; }
     }
 
     public class EnderecoEmpresa
@@ -42,5 +43,15 @@ namespace Api.DevEnvolve.Model
         public int stack { get; set; }
         public decimal preco { get; set; }
         public string descricao { get; set; }
+    }
+
+    public class PlanoEmpresa
+    {
+        [Key]
+        public int idPlanoEmpresa { get; set; }
+
+        public int idEmpresa { get; set; }
+        public int idPlano { get; set; }
+        public Empresa Empresa { get; set; }
     }
 }

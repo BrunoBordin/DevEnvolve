@@ -12,9 +12,7 @@ namespace Api.DevEnvolve.Repository
             {
                 using (var dbContext = new DataContext())
                 {
-                    List<Empresa> empresas = dbContext.Empresa.AsQueryable().ToList();
-
-                    return empresas;
+                    return dbContext.Empresa.AsQueryable().ToList();
                 }
             }
             catch (Exception ex)
@@ -176,6 +174,21 @@ namespace Api.DevEnvolve.Repository
                         freelancers.Add(dbContext.Feelancer.AsQueryable().Where(x => x.idFreelancer == id.idFreelancer).FirstOrDefault());
                     }
                     return freelancers;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static List<Demanda> GetDemandasEmpresa(int id)
+        {
+            try
+            {
+                using (var dbContext = new DataContext())
+                {
+                    return dbContext.Demanda.AsQueryable().Where(x => x.idEmpresa == id).ToList();
                 }
             }
             catch (Exception ex)

@@ -12,9 +12,7 @@ namespace Api.DevEnvolve.Repository
             {
                 using (var dbContext = new DataContext())
                 {
-                    List<Freelancer> freelancers = dbContext.Feelancer.AsQueryable().ToList();
-
-                    return freelancers;
+                    return dbContext.Feelancer.AsQueryable().ToList();
                 }
             }
             catch (Exception ex)
