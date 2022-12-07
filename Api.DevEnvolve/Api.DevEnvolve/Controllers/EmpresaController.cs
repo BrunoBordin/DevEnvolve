@@ -28,6 +28,13 @@ namespace Api.DevEnvolve.Controllers
             return Ok(empresa);
         }
 
+        [HttpGet("ConsultarCandidaturasDemanda")]
+        public async Task<ActionResult<List<Candidatos>>> GetCandidaturas(int idDemanda)
+        {
+            List<Freelancer> cadidatos = EmpresaRepository.ConsultarCandidaturasDemanda(idDemanda, User.Identity.GetPrestadorId());
+            return Ok(cadidatos);
+        }
+
         [HttpPut("AtualizarEmpresa/{idEmpresa}")]
         public async Task<IActionResult> UpdateEmpresa([FromBody] Empresa empresa, int idEmpresa)
         {

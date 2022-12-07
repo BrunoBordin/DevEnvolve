@@ -172,7 +172,7 @@ namespace Api.DevEnvolve.Repository
         {
             try
             {
-                CandidatoDemanda candidatoDemanda = new CandidatoDemanda()
+                CandidatarDemanda candidatoDemanda = new CandidatarDemanda()
                 {
                     idDemanda = idDemanda,
                     idFreelancer = idFreelancer,
