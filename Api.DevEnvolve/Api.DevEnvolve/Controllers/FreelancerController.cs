@@ -18,8 +18,19 @@ namespace Api.DevEnvolve.Controllers
             return Ok(freelancers);
         }
 
+        [HttpGet("PesquisaDemanda")]
+        public async Task<ActionResult<List<Demanda>>> GetDemandaByName(string nomeDemanda)
+        {
+            List<Demanda> demandas = DemandaRepository.GetDemandaByName(nomeDemanda);
+            if (demandas == null || demandas.Count() == 0)
+            {
+                return StatusCode(404, "Demanda não encontrada!");
+            }
+            return Ok(demandas);
+        }
+
         [HttpGet("PesquisaFreelancer")]
-        public async Task<IActionResult> GetFreelancerByName(string nomeFreelancer)
+        public async Task<ActionResult<List<Freelancer>>> GetFreelancerByName(string nomeFreelancer)
         {
             var freelancer = FreelancerRepository.GetFreelancerByName(nomeFreelancer);
             if (freelancer == null)
@@ -29,30 +40,34 @@ namespace Api.DevEnvolve.Controllers
             return Ok(freelancer);
         }
 
-        [HttpPut("AtualizarFreelancer/{idFreelancer}")]
-        public async Task<IActionResult> UpdateFreelancer([FromBody] Freelancer freelancer, int idFreelancer)
+        [HttpPut("AtualizarFreelancer")]
+        public async Task<IActionResult> UpdateFreelancer([FromBody] Freelancer freelancer)
         {
+            int idFreelancer = User.Identity.GetPrestadorId();
             FreelancerRepository.UpdateFreelancer(freelancer, idFreelancer);
             return Ok();
         }
 
-        [HttpDelete("DeletarFreelancer/{idFreelancer}")]
-        public async Task<IActionResult> DeletarFreelancer(int idFreelancer)
+        [HttpDelete("DeletarFreelancer")]
+        public async Task<IActionResult> DeletarFreelancer()
         {
+            int idFreelancer = User.Identity.GetPrestadorId();
             FreelancerRepository.DeleteFreelancer(idFreelancer);
             return Ok();
         }
 
-        [HttpPatch("ReputacaoFreela/{idFreelancer}")]
-        public async Task<IActionResult> Reputacao(int idFreelancer, int reputacao)
+        [HttpPatch("ReputacaoFreela")]
+        public async Task<IActionResult> Reputacao(int reputacao)
         {
+            int idFreelancer = User.Identity.GetPrestadorId();
             FreelancerRepository.Reputacao(reputacao, idFreelancer);
             return Ok();
         }
 
-        [HttpPatch("SenhaFreela/{idFreelancer}")]
-        public async Task<IActionResult> Senha(int idFreelancer, string senha)
+        [HttpPatch("SenhaFreela")]
+        public async Task<IActionResult> Senha(string senha)
         {
+            int idFreelancer = User.Identity.GetPrestadorId();
             int alteraSenha = FreelancerRepository.AlteraSenha(idFreelancer, senha);
             if (alteraSenha == 0)
             {
@@ -68,9 +83,10 @@ namespace Api.DevEnvolve.Controllers
             }
         }
 
-        [HttpPatch("FotoPerfilFreela/{idFreelancer}")]
-        public async Task<IActionResult> FotoPerfil(int idFreelancer, string foto)
+        [HttpPatch("FotoPerfilFreela")]
+        public async Task<IActionResult> FotoPerfil(string foto)
         {
+            int idFreelancer = User.Identity.GetPrestadorId();
             FreelancerRepository.AlteraFotoPerfil(foto, idFreelancer);
             return Ok();
         }
@@ -78,7 +94,15 @@ namespace Api.DevEnvolve.Controllers
         [HttpPost("CandidatarseDemanda")]
         public async Task<IActionResult> CandidatarSeDemanda(int idDemanda, int idEmpresa)
         {
-            FreelancerRepository.CandidatarSeDemanda(User.Identity.GetPrestadorId(), idDemanda, idEmpresa);
+            DemandaRepository.CandidatarSeDemanda(User.Identity.GetPrestadorId(), idDemanda, idEmpresa);
+            return Ok();
+        }
+
+        [HttpPatch("CancelarCandidatura")]
+        public async Task<IActionResult> CancelarCandidatura(int idDemanda)
+        {
+            int idFreelancer = User.Identity.GetPrestadorId();
+            DemandaRepository.CancelarCandidatura(idDemanda, idFreelancer);
             return Ok();
         }
     }

@@ -10,6 +10,7 @@ namespace Api.DevEnvolve.Model
         public int idDemanda { get; set; }
         public int idFreelancer { get; set; }
         public int idEmpresa { get; set; }
+        public int ativo { get; set; }
     }
 
     public class Candidatos

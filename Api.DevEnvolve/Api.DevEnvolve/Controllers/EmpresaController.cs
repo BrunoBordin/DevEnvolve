@@ -18,9 +18,9 @@ namespace Api.DevEnvolve.Controllers
         }
 
         [HttpGet("PesquisaEmpresa")]
-        public async Task<IActionResult> GetEmpresaByName(string nomEmpresa)
+        public async Task<ActionResult<List<Empresa>>> GetEmpresaByName(string nomEmpresa)
         {
-            var empresa = EmpresaRepository.GetEmpresaByName(nomEmpresa);
+            List<Empresa> empresa = EmpresaRepository.GetEmpresaByName(nomEmpresa);
             if (empresa == null)
             {
                 return StatusCode(404, "Empresa não encontrada. Verifique se a empresa existe na base de dados"); ;
@@ -35,24 +35,24 @@ namespace Api.DevEnvolve.Controllers
             return Ok(cadidatos);
         }
 
-        [HttpPut("AtualizarEmpresa/{idEmpresa}")]
-        public async Task<IActionResult> UpdateEmpresa([FromBody] Empresa empresa, int idEmpresa)
+        [HttpPut("AtualizarEmpresa")]
+        public async Task<IActionResult> UpdateEmpresa([FromBody] Empresa empresa)
         {
-            EmpresaRepository.UpdateEmpresa(empresa, idEmpresa);
+            EmpresaRepository.UpdateEmpresa(empresa, User.Identity.GetPrestadorId());
             return Ok();
         }
 
-        [HttpDelete("DeletarEmpresa/{idEmpresa}")]
-        public async Task<IActionResult> DeletarEmpresa(int idEmpresa)
+        [HttpDelete("DeletarEmpresa")]
+        public async Task<IActionResult> DeletarEmpresa()
         {
-            EmpresaRepository.DeleteEmpresa(idEmpresa);
+            EmpresaRepository.DeleteEmpresa(User.Identity.GetPrestadorId());
             return Ok();
         }
 
-        [HttpPatch("SenhaEmpresa/{idEmpresa}")]
-        public async Task<IActionResult> Senha(int idEmpresa, string senha)
+        [HttpPatch("SenhaEmpresa")]
+        public async Task<IActionResult> Senha(string senha)
         {
-            int alteraSenha = EmpresaRepository.AlteraSenha(idEmpresa, senha);
+            int alteraSenha = EmpresaRepository.AlteraSenha(User.Identity.GetPrestadorId(), senha);
             if (alteraSenha == 0)
             {
                 return Ok();
@@ -67,10 +67,10 @@ namespace Api.DevEnvolve.Controllers
             }
         }
 
-        [HttpPatch("FotoPerfilEmpresa/{idEmpresa}")]
-        public async Task<IActionResult> FotoPerfil(int idEmpresa, string foto)
+        [HttpPatch("FotoPerfilEmpresa")]
+        public async Task<IActionResult> FotoPerfil(string foto)
         {
-            EmpresaRepository.AlteraFotoPerfil(foto, idEmpresa);
+            EmpresaRepository.AlteraFotoPerfil(foto, User.Identity.GetPrestadorId());
             return Ok();
         }
 
