@@ -31,4 +31,16 @@ namespace Api.DevEnvolve.Model
         public int idEmpresa { get; set; }
         public Empresa Empresa { get; set; }
     }
+
+    public class Demanda
+    {
+        [Key]
+        public int idDemanda { get; set; }
+
+        public int idEmpresa { get; set; }
+        public string nome { get; set; }
+        public int stack { get; set; }
+        public decimal preco { get; set; }
+        public string descricao { get; set; }
+    }
 }

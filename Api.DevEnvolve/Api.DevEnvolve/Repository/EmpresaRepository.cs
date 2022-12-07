@@ -128,7 +128,7 @@ namespace Api.DevEnvolve.Repository
                     var encod = new DefaultSGUPasswordEncoderHandler();
                     var senhaCripto = encod.encodePlainPassword(encod.plainPassword(email, senha));
 
-                    Empresa? empresa = dbContext.Empresa.AsQueryable().Where(x => x.email == email && x.senha == senha).FirstOrDefault();
+                    Empresa? empresa = dbContext.Empresa.AsQueryable().Where(x => x.email == email && x.senha == senhaCripto).FirstOrDefault();
                     if (empresa != null)
                     {
                         UsuarioToken usuarioToken = new UsuarioToken()
@@ -137,15 +137,32 @@ namespace Api.DevEnvolve.Repository
                             email = empresa.email,
                             senha = empresa.senha
                         };
+                        return usuarioToken;
                     }
                     else return null;
-                };
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            throw new NotImplementedException();
+        }
+
+        public static void CadastraDemanda(Demanda demanda, int id)
+        {
+            try
+            {
+                demanda.idEmpresa = id;
+                using (var dbContexto = new DataContext())
+                {
+                    dbContexto.Add(demanda);
+                    dbContexto.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

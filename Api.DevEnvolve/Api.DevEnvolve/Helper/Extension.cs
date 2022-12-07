@@ -157,12 +157,13 @@ namespace Api.DevEnvolve.Helper
         {
             public const string id = "id";
         }
-        public static long GetPrestadorId(this IIdentity identity)
+
+        public static int GetPrestadorId(this IIdentity identity)
         {
             ClaimsIdentity claimsIdentity = identity as ClaimsIdentity;
             Claim claim = claimsIdentity?.FindFirst(CustomClaimTypes.id);
             if (claim == null) return 0;
-            return long.Parse(claim.Value);
+            return int.Parse(claim.Value);
         }
     }
 }

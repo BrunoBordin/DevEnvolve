@@ -68,9 +68,10 @@ namespace Api.DevEnvolve.Controllers
         }
 
         [HttpPost("CadastraDemanda")]
-        public async Task<IActionResult> CadastraDemanda()
+        public async Task<IActionResult> CadastraDemanda(Demanda demanda)
         {
-            var id = User.Identity.GetPrestadorId();
+            int id = User.Identity.GetPrestadorId();
+            EmpresaRepository.CadastraDemanda(demanda, id);
             return Ok();
         }
     }
