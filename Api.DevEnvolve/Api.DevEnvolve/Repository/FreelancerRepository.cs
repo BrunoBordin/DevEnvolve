@@ -23,13 +23,13 @@ namespace Api.DevEnvolve.Repository
             }
         }
 
-        public static Freelancer GetFreelancerByName(string nomeFreelancer)
+        public static List<Freelancer> GetFreelancerByName(string nomeFreelancer)
         {
             try
             {
                 using (var dbContext = new DataContext())
                 {
-                    var freelancer = dbContext.Feelancer.AsQueryable().Where(x => x.nome.Contains(nomeFreelancer)).FirstOrDefault();
+                    List<Freelancer> freelancer = dbContext.Feelancer.AsQueryable().Where(x => x.nome.Contains(nomeFreelancer)).ToList();
 
                     return freelancer;
                 };
@@ -176,7 +176,8 @@ namespace Api.DevEnvolve.Repository
                 {
                     idDemanda = idDemanda,
                     idFreelancer = idFreelancer,
-                    idEmpresa = idEmpresa
+                    idEmpresa = idEmpresa,
+                    ativo = 0
                 };
                 using (var DbContext = new DataContext())
                 {
