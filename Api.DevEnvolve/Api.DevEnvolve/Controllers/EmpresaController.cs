@@ -48,6 +48,12 @@ namespace Api.DevEnvolve.Controllers
             EmpresaRepository.DeleteEmpresa(User.Identity.GetPrestadorId());
             return Ok();
         }
+        [HttpDelete("DeletarDemanda/{idDemanda}")]
+        public async Task<IActionResult> DeletarDemanda(int idDemanda)
+        {
+            DemandaRepository.DeletarDemanda(User.Identity.GetPrestadorId(),idDemanda);
+            return Ok();
+        }
 
         [HttpPatch("SenhaEmpresa")]
         public async Task<IActionResult> Senha(string senha)

@@ -54,5 +54,22 @@ namespace Api.DevEnvolve.Repository
                 DbContext.SaveChanges();
             }
         }
+
+        public static void DeletarDemanda(int v, int idDemanda)
+        {
+            try
+            {
+                using (var DbContext = new DataContext())
+                {
+                    var demanda = DbContext.Demanda.AsQueryable().Where(x => x.idDemanda == idDemanda).FirstOrDefault();
+                    DbContext.Remove(demanda);
+                    DbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
