@@ -42,6 +42,16 @@ namespace Api.DevEnvolve.Repository
                         dbContext.EnderecoFreelancer.Add(enderecoFreelancer);
                         dbContext.SaveChanges();
                     }
+                    PlanoFreelancer planoFreelancer = new PlanoFreelancer()
+                    {
+                        idFreelancer = userFreelancer.idFreelancer,
+                        idPlano = usuario.idPlano
+                    };
+                    using (var dbContext = new DataContext())
+                    {
+                        dbContext.PlanoFreelancer.Add(planoFreelancer);
+                        dbContext.SaveChanges();
+                    }
                 }
                 else
                 {
@@ -72,6 +82,16 @@ namespace Api.DevEnvolve.Repository
                     using (var dbContext = new DataContext())
                     {
                         dbContext.EnderecoEmpresa.Add(enderecoEmpresa);
+                        dbContext.SaveChanges();
+                    }
+                    PlanoEmpresa planoEmpresa = new PlanoEmpresa()
+                    {
+                        idEmpresa = userEmpresa.idEmpresa,
+                        idPlano = usuario.idPlano
+                    };
+                    using (var dbContext = new DataContext())
+                    {
+                        dbContext.PlanoEmpresa.Add(planoEmpresa);
                         dbContext.SaveChanges();
                     }
                 }
