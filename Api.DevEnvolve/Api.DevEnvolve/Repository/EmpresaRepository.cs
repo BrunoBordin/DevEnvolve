@@ -164,5 +164,26 @@ namespace Api.DevEnvolve.Repository
                 throw ex;
             }
         }
+
+        public static List<Freelancer> ConsultarCandidaturasDemanda(int idDemanda, int idEmpresa)
+        {
+            try
+            {
+                using (var dbContext = new DataContext())
+                {
+                    var idFreelancers = dbContext.CandidatoDemanda.AsQueryable().Where(x => x.idEmpresa == idEmpresa && x.idDemanda == idDemanda).ToList();
+                    List<Freelancer> freelancers = new List<Freelancer>();
+                    foreach (var id in idFreelancers)
+                    {
+                        freelancers.Add(dbContext.Feelancer.AsQueryable().Where(x => x.idFreelancer == id.idFreelancer).FirstOrDefault());
+                    }
+                    return freelancers;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

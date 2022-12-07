@@ -11,7 +11,7 @@ namespace Api.DevEnvolve.Data
         public virtual DbSet<EnderecoEmpresa> EnderecoEmpresa { get; set; }
         public virtual DbSet<EnderecoFreelancer> EnderecoFreelancer { get; set; }
         public virtual DbSet<Demanda> Demanda { get; set; }
-        public virtual DbSet<CandidatoDemanda> CandidatoDemanda { get; set; }
+        public virtual DbSet<CandidatarDemanda> CandidatoDemanda { get; set; }
 
         public virtual DbSet<UsuarioToken> UsuarioToken { get; set; }
 
@@ -36,7 +36,7 @@ namespace Api.DevEnvolve.Data
             modelBuilder.Entity<Usuario>(x => x.HasNoKey());
             modelBuilder.Entity<UsuarioToken>(x => x.HasNoKey());
             modelBuilder.Entity<Demanda>(x => x.ToTable("Demanda"));
-            modelBuilder.Entity<CandidatoDemanda>(x => x.ToTable("CandidatoDemanda"));
+            modelBuilder.Entity<CandidatarDemanda>(x => x.ToTable("CandidatoDemanda"));
         }
     }
 }
