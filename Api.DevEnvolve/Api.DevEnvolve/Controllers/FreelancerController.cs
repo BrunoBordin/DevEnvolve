@@ -1,4 +1,5 @@
-﻿using Api.DevEnvolve.Model;
+﻿using Api.DevEnvolve.Helper;
+using Api.DevEnvolve.Model;
 using Api.DevEnvolve.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -71,6 +72,13 @@ namespace Api.DevEnvolve.Controllers
         public async Task<IActionResult> FotoPerfil(int idFreelancer, string foto)
         {
             FreelancerRepository.AlteraFotoPerfil(foto, idFreelancer);
+            return Ok();
+        }
+
+        [HttpPost("CandidatarseDemanda")]
+        public async Task<IActionResult> CandidatarSeDemanda(int idDemanda, int idEmpresa)
+        {
+            FreelancerRepository.CandidatarSeDemanda(User.Identity.GetPrestadorId(), idDemanda, idEmpresa);
             return Ok();
         }
     }
