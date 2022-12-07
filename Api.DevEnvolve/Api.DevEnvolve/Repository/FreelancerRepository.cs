@@ -167,5 +167,27 @@ namespace Api.DevEnvolve.Repository
         {
             throw new NotImplementedException();
         }
+
+        public static void CandidatarSeDemanda(int idFreelancer, int idDemanda, int idEmpresa)
+        {
+            try
+            {
+                CandidatoDemanda candidatoDemanda = new CandidatoDemanda()
+                {
+                    idDemanda = idDemanda,
+                    idFreelancer = idFreelancer,
+                    idEmpresa = idEmpresa
+                };
+                using (var DbContext = new DataContext())
+                {
+                    DbContext.Add(candidatoDemanda);
+                    DbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
