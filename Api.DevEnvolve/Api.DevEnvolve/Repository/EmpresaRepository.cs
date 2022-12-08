@@ -196,5 +196,20 @@ namespace Api.DevEnvolve.Repository
                 throw ex;
             }
         }
+
+        public static List<Demanda> GetDemandas()
+        {
+            try
+            {
+                using (var dbContext = new DataContext())
+                {
+                    return dbContext.Demanda.AsQueryable().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
