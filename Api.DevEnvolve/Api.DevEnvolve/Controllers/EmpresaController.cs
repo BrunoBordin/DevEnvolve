@@ -24,6 +24,13 @@ namespace Api.DevEnvolve.Controllers
             return Ok(EmpresaRepository.GetDemandasEmpresa(id));
         }
 
+        [HttpGet("GetDemandasEmpresa")]
+        public async Task<ActionResult<List<Demanda>>> GetDemandasEmpresa()
+        {
+            return Ok(EmpresaRepository.GetDemandas();
+        }
+
+
         [HttpGet("PesquisaEmpresa")]
         public async Task<ActionResult<List<Empresa>>> GetEmpresaByName(string nomEmpresa)
         {
