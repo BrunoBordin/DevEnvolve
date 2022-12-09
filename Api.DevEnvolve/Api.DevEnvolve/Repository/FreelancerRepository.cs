@@ -48,14 +48,22 @@ namespace Api.DevEnvolve.Repository
                     var senhaCripto = encod.encodePlainPassword(encod.plainPassword(email, senha));
 
                     Freelancer? freelancer = dbContext.Feelancer.AsQueryable().Where(x => x.email == email && x.senha == senhaCripto).FirstOrDefault();
+                    freelancer.endereco = dbContext.EnderecoFreelancer.AsQueryable().Where(x => x.idFreelancer == freelancer.idFreelancer).FirstOrDefault();
                     if (freelancer != null)
                     {
                         UsuarioToken usuarioToken = new()
                         {
                             id = freelancer.idFreelancer,
                             email = freelancer.email,
-                            senha = freelancer.senha
+                            senha = freelancer.senha,
+                            idEndereco = freelancer.endereco.idEndereco,
+                            cidade = freelancer.endereco.cidade,
+                            estado = freelancer.endereco.estado,
+                            cep = freelancer.endereco.cep,
+                            logradouro = freelancer.endereco.logradouro,
+                            numero = freelancer.endereco.numero
                         };
+
                         return usuarioToken;
                     }
                     else return null;
