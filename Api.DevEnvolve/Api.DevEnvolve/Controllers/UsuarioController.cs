@@ -12,7 +12,7 @@ namespace Api.DevEnvolve.Controllers
         public async Task<IActionResult> AddUsuario([FromBody] Usuario usuario)
         {
             UsuarioRepository.AddUsuario(usuario);
-            return Ok();
+            return Ok(usuario);
         }
     }
 }
