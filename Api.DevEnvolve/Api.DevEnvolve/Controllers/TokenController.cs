@@ -13,7 +13,7 @@ namespace Api.DevEnvolve.Controllers
     public class TokenController : ControllerBase
     {
         [HttpPost("login")]
-        public async Task<IActionResult> RequestTokenAsync([FromBody] UsuarioToken user)
+        public async Task<IActionResult> RequestTokenAsync([FromBody] UsuarioLogin user)
         {
             var configuration = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
@@ -48,7 +48,9 @@ namespace Api.DevEnvolve.Controllers
                     expires: expires,
                     signingCredentials: creds
                 );
-                return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(token) });
+                usuario.token =  new JwtSecurityTokenHandler().WriteToken(token);
+                usuario.tipo = user.tipo;
+                return Ok(usuario);
             }
             catch (Exception ex)
             {
