@@ -30,7 +30,8 @@ namespace Api.DevEnvolve.Repository
                     idDemanda = idDemanda,
                     idFreelancer = idFreelancer,
                     idEmpresa = idEmpresa,
-                    ativo = 0
+                    ativo = 0,
+                    dataCandidatura = DateTime.Now
                 };
                 using (var DbContext = new DataContext())
                 {
@@ -123,17 +124,27 @@ namespace Api.DevEnvolve.Repository
             }
         }
 
-        public static List<Demanda> ConsultarDemandasCandidatado(int idFreelancer)
+        public static List<DemandaCandidato> ConsultarDemandasCandidatado(int idFreelancer)
         {
             try
             {
                 using (var dbContext = new DataContext())
                 {
                     var idFreelancers = dbContext.CandidatoDemanda.AsQueryable().Where(x => x.idFreelancer == idFreelancer && x.ativo == 0).ToList();
-                    List<Demanda> demandas = new List<Demanda>();
+                    List<DemandaCandidato> demandas = new List<DemandaCandidato>();
                     foreach (var id in idFreelancers)
                     {
-                        demandas.Add(dbContext.Demanda.AsQueryable().Where(x => x.idDemanda == id.idDemanda).FirstOrDefault());
+                        var deman = dbContext.Demanda.AsQueryable().Where(x => x.idDemanda == id.idDemanda).FirstOrDefault();
+                        DemandaCandidato demandaCandidato = new DemandaCandidato()
+                        {
+                            idDemanda = deman.idDemanda,
+                            nome= deman.nome,
+                            stack= deman.stack,
+                            valor = deman.preco,
+                            dataCandidatura = id.dataCandidatura,
+                            descricao = deman.descricao
+                        };
+                        demandas.Add(demandaCandidato);
                     }
                     return demandas;
                 }

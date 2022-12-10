@@ -11,7 +11,7 @@ namespace Api.DevEnvolve.Repository
             {
                 using (var dbContext = new DataContext())
                 {
-                    return dbContext.PlanosDevEnvolve.AsQueryable().Where(x => x.usuario == 'e').ToList();
+                    return dbContext.PlanosDevEnvolve.AsQueryable().Where(x => x.usuario == 1).ToList();
                 }
             }
             catch (Exception ex)
@@ -26,7 +26,7 @@ namespace Api.DevEnvolve.Repository
             {
                 using (var dbContext = new DataContext())
                 {
-                    return dbContext.PlanosDevEnvolve.AsQueryable().Where(x => x.usuario == 'f').ToList();
+                    return dbContext.PlanosDevEnvolve.AsQueryable().Where(x => x.usuario == 0).ToList();
                 }
             }
             catch (Exception ex)

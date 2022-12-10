@@ -11,6 +11,7 @@ namespace Api.DevEnvolve.Model
         public int idFreelancer { get; set; }
         public int idEmpresa { get; set; }
         public int ativo { get; set; }
+        public DateTime dataCandidatura { get; set; }
     }
 
     public class Candidatos
