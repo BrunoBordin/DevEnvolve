@@ -54,6 +54,7 @@ namespace Api.DevEnvolve.Repository
                         UsuarioToken usuarioToken = new()
                         {
                             id = freelancer.idFreelancer,
+                            nome = freelancer.nome,
                             email = freelancer.email,
                             senha = freelancer.senha,
                             idEndereco = freelancer.endereco.idEndereco,
