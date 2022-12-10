@@ -17,19 +17,6 @@ namespace Api.DevEnvolve.Controllers
             return Ok(EmpresaRepository.GetEmpresas());
         }
 
-        [HttpGet("GetDemandasEmpresa")]
-        public async Task<ActionResult<List<Demanda>>> GetDemandasEmpresa()
-        {
-            int id = User.Identity.GetPrestadorId();
-            return Ok(EmpresaRepository.GetDemandasEmpresa(id));
-        }
-
-        [HttpGet("GetDemandas")]
-        public async Task<ActionResult<List<Demanda>>> GetDemandas()
-        {
-            return Ok(EmpresaRepository.GetDemandas());
-        }
-
         [HttpGet("PesquisaEmpresa")]
         public async Task<ActionResult<List<Empresa>>> GetEmpresaByName(string nomEmpresa)
         {
@@ -39,13 +26,6 @@ namespace Api.DevEnvolve.Controllers
                 return StatusCode(404, "Empresa não encontrada. Verifique se a empresa existe na base de dados"); ;
             }
             return Ok(empresa);
-        }
-
-        [HttpGet("ConsultarCandidaturasDemanda")]
-        public async Task<ActionResult<List<Candidatos>>> GetCandidaturas(int idDemanda)
-        {
-            List<Freelancer> cadidatos = EmpresaRepository.ConsultarCandidaturasDemanda(idDemanda, User.Identity.GetPrestadorId());
-            return Ok(cadidatos);
         }
 
         [HttpPut("AtualizarEmpresa")]
@@ -62,12 +42,6 @@ namespace Api.DevEnvolve.Controllers
             return Ok();
         }
 
-        [HttpDelete("DeletarDemanda/{idDemanda}")]
-        public async Task<IActionResult> DeletarDemanda(int idDemanda)
-        {
-            DemandaRepository.DeletarDemanda(User.Identity.GetPrestadorId(), idDemanda);
-            return Ok();
-        }
 
         [HttpPatch("SenhaEmpresa")]
         public async Task<IActionResult> Senha(string senha)

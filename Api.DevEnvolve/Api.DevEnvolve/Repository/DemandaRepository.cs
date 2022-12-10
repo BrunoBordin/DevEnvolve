@@ -71,5 +71,56 @@ namespace Api.DevEnvolve.Repository
                 throw ex;
             }
         }
+
+        public static List<Demanda> GetDemandas()
+        {
+            try
+            {
+                using (var dbContext = new DataContext())
+                {
+                    return dbContext.Demanda.AsQueryable().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static List<Demanda> GetDemandasEmpresa(int id)
+        {
+            try
+            {
+                using (var dbContext = new DataContext())
+                {
+                    return dbContext.Demanda.AsQueryable().Where(x => x.idEmpresa == id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static List<Freelancer> ConsultarCandidaturasDemanda(int idDemanda, int idEmpresa)
+        {
+            try
+            {
+                using (var dbContext = new DataContext())
+                {
+                    var idFreelancers = dbContext.CandidatoDemanda.AsQueryable().Where(x => x.idEmpresa == idEmpresa && x.idDemanda == idDemanda && x.ativo == 0).ToList();
+                    List<Freelancer> freelancers = new List<Freelancer>();
+                    foreach (var id in idFreelancers)
+                    {
+                        freelancers.Add(dbContext.Feelancer.AsQueryable().Where(x => x.idFreelancer == id.idFreelancer).FirstOrDefault());
+                    }
+                    return freelancers;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
