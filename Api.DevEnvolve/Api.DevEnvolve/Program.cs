@@ -11,9 +11,10 @@ var Configuration = new ConfigurationBuilder()
              .Build();
 // Add services to the container.
 
-builder.Services.AddControllers();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers().AddJsonOptions(x =>
+{
+    x.JsonSerializerOptions.PropertyNamingPolicy = null;
+}); ;
 
 builder.Services.AddCors(options =>
 {
@@ -21,8 +22,7 @@ builder.Services.AddCors(options =>
         builder => builder
         .AllowAnyOrigin()
         .AllowAnyMethod()
-        .AllowAnyHeader()
-        .AllowCredentials());
+        .AllowAnyHeader());
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(s =>
@@ -88,6 +88,10 @@ if (app.Environment.IsDevelopment())
 app.UseSwagger();
 app.UseHttpsRedirection();
 
+app.UseCors(options =>
+                options.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader());
 app.UseAuthentication();
 app.UseAuthorization();
 
