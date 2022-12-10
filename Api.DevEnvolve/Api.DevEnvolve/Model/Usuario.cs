@@ -13,5 +13,6 @@
         public string logradouro { get; set; }
         public int numero { get; set; }
         public int idPlano { get; set; }
+        public List<Skill>? skill { get; set; }
     }
 }

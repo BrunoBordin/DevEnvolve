@@ -16,6 +16,7 @@ namespace Api.DevEnvolve.Data
         public virtual DbSet<PlanoFreelancer> PlanoFreelancer { get; set; }
         public virtual DbSet<PlanosDevEnvolve> PlanosDevEnvolve { get; set; }
         public virtual DbSet<UsuarioToken> UsuarioToken { get; set; }
+        public virtual DbSet<Skill> SkillFreelancer { get; set; }
         public virtual DbSet<Skills> Skills { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -45,7 +46,8 @@ namespace Api.DevEnvolve.Data
             modelBuilder.Entity<PlanoEmpresa>(x => x.ToTable("PlanosEmpresa"));
             modelBuilder.Entity<PlanoFreelancer>(x => x.ToTable("PlanosFreelancer"));
             modelBuilder.Entity<PlanosDevEnvolve>(x => x.ToTable("PlanosDevEnvolve"));
-            modelBuilder.Entity<Skills>(x => x.ToTable("SkillsFreelancer"));
+            modelBuilder.Entity<Skill>(x => x.ToTable("SkillsFreelancer"));
+            modelBuilder.Entity<Skills>(x => x.ToTable("Skills"));
         }
     }
 }

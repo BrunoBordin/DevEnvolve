@@ -52,20 +52,20 @@ namespace Api.DevEnvolve.Repository
                         dbContext.PlanoFreelancer.Add(planoFreelancer);
                         dbContext.SaveChanges();
                     }
-                    //foreach (var skil in usuario.skills)
-                    //{
-                    //    Skills skill = new Skills
-                    //    {
-                    //        idSkill = skil,
-                    //        idFreelancer = userFreelancer.idFreelancer
-                    //    };
+                    foreach (var skil in usuario.skill)
+                    {
+                        Skill skill = new Skill
+                        {
+                            idSkill = skil.idSkill,
+                            idFreelancer = userFreelancer.idFreelancer
+                        };
 
-                    //    using (var dbContext = new DataContext())
-                    //    {
-                    //        dbContext.Skills.Add(skill);
-                    //        dbContext.SaveChanges();
-                    //    }
-                    //}
+                        using (var dbContext = new DataContext())
+                        {
+                            dbContext.SkillFreelancer.Add(skill);
+                            dbContext.SaveChanges();
+                        }
+                    }
                 }
                 else
                 {
