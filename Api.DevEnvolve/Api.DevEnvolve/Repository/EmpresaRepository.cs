@@ -134,12 +134,14 @@ namespace Api.DevEnvolve.Repository
                             nome = empresa.nome,
                             email = empresa.email,
                             senha = empresa.senha,
+                            descricao = empresa.descricao,
                             idEndereco = empresa.endereco.idEndereco,
                             cidade = empresa.endereco.cidade,
                             estado = empresa.endereco.estado,
                             cep = empresa.endereco.cep,
                             logradouro = empresa.endereco.logradouro,
-                            numero = empresa.endereco.numero
+                            numero = empresa.endereco.numero,
+                            bairro = empresa.endereco.bairro
                         };
                         return usuarioToken;
                     }

@@ -57,6 +57,7 @@ namespace Api.DevEnvolve.Repository
                             nome = freelancer.nome,
                             email = freelancer.email,
                             senha = freelancer.senha,
+                            descricao = freelancer.descricao,
                             idEndereco = freelancer.endereco.idEndereco,
                             cidade = freelancer.endereco.cidade,
                             estado = freelancer.endereco.estado,
