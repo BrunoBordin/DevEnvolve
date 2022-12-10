@@ -134,15 +134,18 @@ namespace Api.DevEnvolve.Repository
                             nome = empresa.nome,
                             email = empresa.email,
                             senha = empresa.senha,
-                            descricao = empresa.descricao,
-                            idEndereco = empresa.endereco.idEndereco,
-                            cidade = empresa.endereco.cidade,
-                            estado = empresa.endereco.estado,
-                            cep = empresa.endereco.cep,
-                            logradouro = empresa.endereco.logradouro,
-                            numero = empresa.endereco.numero,
-                            bairro = empresa.endereco.bairro
+                            descricao = empresa.descricao
                         };
+                        if (empresa.endereco != null)
+                        {
+                            usuarioToken.idEndereco = empresa.endereco.idEndereco;
+                            usuarioToken.cidade = empresa.endereco.cidade;
+                            usuarioToken.estado = empresa.endereco.estado;
+                            usuarioToken.cep = empresa.endereco.cep;
+                            usuarioToken.logradouro = empresa.endereco.logradouro;
+                            usuarioToken.numero = empresa.endereco.numero;
+                            usuarioToken.bairro = empresa.endereco.bairro;
+                        }
                         return usuarioToken;
                     }
                     else return null;
