@@ -43,6 +43,8 @@ namespace Api.DevEnvolve.Model
         public int stack { get; set; }
         public decimal preco { get; set; }
         public string descricao { get; set; }
+        public string imagem { get; set; }
+        public string? nomeEmpresa { get; set; }
     }
 
     public class PlanoEmpresa

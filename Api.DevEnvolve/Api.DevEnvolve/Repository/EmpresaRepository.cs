@@ -157,10 +157,13 @@ namespace Api.DevEnvolve.Repository
             try
             {
                 demanda.idEmpresa = id;
-                using (var dbContexto = new DataContext())
+                using (var dbContext = new DataContext())
                 {
-                    dbContexto.Add(demanda);
-                    dbContexto.SaveChanges();
+                    var empresa = dbContext.Empresa.AsQueryable().Where(x => x.idEmpresa == id).FirstOrDefault();
+
+                    demanda.nomeEmpresa = empresa.nome;
+                    dbContext.Add(demanda);
+                    dbContext.SaveChanges();
                 }
             }
             catch (Exception ex)
