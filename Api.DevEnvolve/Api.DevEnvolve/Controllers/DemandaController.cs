@@ -16,7 +16,7 @@ namespace Api.DevEnvolve.Controllers
         }
 
         [HttpGet("GetDemandasEmpresa")]
-        public async Task<ActionResult<List<Demanda>>> GetDemandasEmpresa()
+        public async Task<ActionResult<List<DemandaEmpresa>>> GetDemandasEmpresa()
         {
             int id = User.Identity.GetPrestadorId();
             return Ok(DemandaRepository.GetDemandasEmpresa(id));
@@ -34,6 +34,13 @@ namespace Api.DevEnvolve.Controllers
         {
             List<Freelancer> cadidatos = DemandaRepository.ConsultarCandidaturasDemanda(idDemanda, User.Identity.GetPrestadorId());
             return Ok(cadidatos);
+        }
+
+        [HttpGet("GetNumeroCandidaturas")]
+        public async Task<ActionResult<List<Candidatos>>> GetNumeroCandidaturas(int idDemanda)
+        {
+            List<Freelancer> cadidatos = DemandaRepository.ConsultarCandidaturasDemanda(idDemanda, User.Identity.GetPrestadorId());
+            return Ok(cadidatos.Count);
         }
 
         [HttpGet("ConsultarDemandasCandidatado")]

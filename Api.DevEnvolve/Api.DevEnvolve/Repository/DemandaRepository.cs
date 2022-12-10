@@ -88,13 +88,33 @@ namespace Api.DevEnvolve.Repository
             }
         }
 
-        public static List<Demanda> GetDemandasEmpresa(int id)
+        public static List<DemandaEmpresa> GetDemandasEmpresa(int id)
         {
             try
             {
+                List<DemandaEmpresa> demandaEmpresas = new List<DemandaEmpresa>();
                 using (var dbContext = new DataContext())
                 {
-                    return dbContext.Demanda.AsQueryable().Where(x => x.idEmpresa == id).ToList();
+                    List<Demanda> demans = dbContext.Demanda.AsQueryable().Where(x => x.idEmpresa == id).ToList();
+                    foreach (var item in demans)
+                    {
+                        var candidatos = dbContext.CandidatoDemanda.AsQueryable().Where(x => x.idDemanda == item.idDemanda).Count();
+                        DemandaEmpresa demandaEmpresa = new DemandaEmpresa()
+                        {
+                            idDemanda = item.idDemanda,
+
+                            idEmpresa = item.idEmpresa,
+                            nome  = item.nome,
+                            stack  = item.stack,
+                            preco  = item.preco,
+                            descricao  = item.descricao,
+                            imagem = item.imagem,
+                            nomeEmpresa = item.nomeEmpresa,
+                            numeroCandidatos = candidatos
+                        };
+                        demandaEmpresas.Add(demandaEmpresa);
+                    }
+                    return demandaEmpresas;
                 }
             }
             catch (Exception ex)
