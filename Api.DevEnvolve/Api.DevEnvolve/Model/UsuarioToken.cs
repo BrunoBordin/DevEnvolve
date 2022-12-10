@@ -6,6 +6,7 @@
         public string nome { get; set; }
         public string email { get; set; }
         public string senha { get; set; }
+        public string descricao { get; set; }
         public string tipo { get; set; }
         public int idEndereco { get; set; }
         public string cidade { get; set; }

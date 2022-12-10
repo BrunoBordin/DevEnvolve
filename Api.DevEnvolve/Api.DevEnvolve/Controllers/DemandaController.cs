@@ -34,6 +34,12 @@ namespace Api.DevEnvolve.Controllers
             List<Freelancer> cadidatos = DemandaRepository.ConsultarCandidaturasDemanda(idDemanda, User.Identity.GetPrestadorId());
             return Ok(cadidatos);
         }
+        [HttpGet("ConsultarDemandasCandidatado")]
+        public async Task<ActionResult<List<Demanda>>> GetDemandasCandidatado()
+        {
+            List<Demanda> demandas = DemandaRepository.ConsultarDemandasCandidatado(User.Identity.GetPrestadorId());
+            return Ok(demandas);
+        }
 
     }
 }

@@ -21,7 +21,8 @@ namespace Api.DevEnvolve.Repository
                         nome = usuario.nome,
                         email = usuario.email,
                         senha = senhaCripto,
-                        celular = Extension.RemoveNonNumeric(usuario.celular)
+                        celular = Extension.RemoveNonNumeric(usuario.celular),
+                        descricao = usuario.descricao
                     };
                     using (var dbContext = new DataContext())
                     {
@@ -64,7 +65,8 @@ namespace Api.DevEnvolve.Repository
                         nome = usuario.nome,
                         email = usuario.email,
                         senha = senhaCripto,
-                        celular = Extension.RemoveNonNumeric(usuario.celular)
+                        celular = Extension.RemoveNonNumeric(usuario.celular),
+                        descricao = usuario.descricao
                     };
                     using (var dbContext = new DataContext())
                     {
