@@ -8,6 +8,6 @@ namespace Api.DevEnvolve.Model
         public int idPlano { get; set; }
         public string descricao { get; set; }
         public decimal valor { get; set; }
-        public char usuario { get; set; }
+        public int usuario { get; set; }
     }
 }

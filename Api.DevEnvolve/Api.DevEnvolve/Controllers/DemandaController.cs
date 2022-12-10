@@ -28,18 +28,19 @@ namespace Api.DevEnvolve.Controllers
             DemandaRepository.DeletarDemanda(User.Identity.GetPrestadorId(), idDemanda);
             return Ok();
         }
+
         [HttpGet("ConsultarCandidaturasDemanda")]
         public async Task<ActionResult<List<Candidatos>>> GetCandidaturas(int idDemanda)
         {
             List<Freelancer> cadidatos = DemandaRepository.ConsultarCandidaturasDemanda(idDemanda, User.Identity.GetPrestadorId());
             return Ok(cadidatos);
         }
+
         [HttpGet("ConsultarDemandasCandidatado")]
-        public async Task<ActionResult<List<Demanda>>> GetDemandasCandidatado()
+        public async Task<ActionResult<List<DemandaCandidato>>> GetDemandasCandidatado()
         {
-            List<Demanda> demandas = DemandaRepository.ConsultarDemandasCandidatado(User.Identity.GetPrestadorId());
+            List<DemandaCandidato> demandas = DemandaRepository.ConsultarDemandasCandidatado(User.Identity.GetPrestadorId());
             return Ok(demandas);
         }
-
     }
 }

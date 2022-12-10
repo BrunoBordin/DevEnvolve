@@ -19,5 +19,6 @@ namespace Api.DevEnvolve.Controllers
         {
             return Ok(PlanosRepository.GetPlanosFreelancer());
         }
+
     }
 }
