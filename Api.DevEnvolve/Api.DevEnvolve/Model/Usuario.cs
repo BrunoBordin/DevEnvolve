@@ -11,8 +11,9 @@
         public string estado { get; set; }
         public string cep { get; set; }
         public string logradouro { get; set; }
+        public string bairro { get; set; }
         public int numero { get; set; }
         public int idPlano { get; set; }
-        public List<Skill>? skill { get; set; }
+        //public List<Skill>? skill { get; set; }
     }
 }
