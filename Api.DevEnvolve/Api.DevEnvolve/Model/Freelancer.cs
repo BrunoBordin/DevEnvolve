@@ -29,6 +29,7 @@ namespace Api.DevEnvolve.Model
         public string cep { get; set; }
         public string logradouro { get; set; }
         public int numero { get; set; }
+        public string bairro { get; set; }
         public int idFreelancer { get; set; }
         public Freelancer freelancer { get; set; }
     }

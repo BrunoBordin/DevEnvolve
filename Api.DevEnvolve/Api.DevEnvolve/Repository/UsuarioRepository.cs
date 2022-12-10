@@ -36,6 +36,7 @@ namespace Api.DevEnvolve.Repository
                         cep = usuario.cep,
                         logradouro = usuario.logradouro,
                         numero = usuario.numero,
+                        bairro= usuario.bairro,
                     };
                     using (var dbContext = new DataContext())
                     {
@@ -51,20 +52,6 @@ namespace Api.DevEnvolve.Repository
                     {
                         dbContext.PlanoFreelancer.Add(planoFreelancer);
                         dbContext.SaveChanges();
-                    }
-                    foreach (var skil in usuario.skill)
-                    {
-                        Skill skill = new Skill
-                        {
-                            idSkill = skil.idSkill,
-                            idFreelancer = userFreelancer.idFreelancer
-                        };
-
-                        using (var dbContext = new DataContext())
-                        {
-                            dbContext.SkillFreelancer.Add(skill);
-                            dbContext.SaveChanges();
-                        }
                     }
                 }
                 else
@@ -92,6 +79,7 @@ namespace Api.DevEnvolve.Repository
                         cep = usuario.cep,
                         logradouro = usuario.logradouro,
                         numero = usuario.numero,
+                        bairro= usuario.bairro,
                     };
                     using (var dbContext = new DataContext())
                     {

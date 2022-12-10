@@ -42,5 +42,30 @@ namespace Api.DevEnvolve.Repository
                 throw ex;
             }
         }
+
+        public static void PostSkillsFreelancer(List<int> idSkill, int idFreelancer)
+        {
+            try
+            {
+                foreach (var skil in idSkill)
+                {
+                    Skill skill = new Skill
+                    {
+                        idSkill = skil,
+                        idFreelancer = idFreelancer
+                    };
+
+                    using (var dbContext = new DataContext())
+                    {
+                        dbContext.SkillFreelancer.Add(skill);
+                        dbContext.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

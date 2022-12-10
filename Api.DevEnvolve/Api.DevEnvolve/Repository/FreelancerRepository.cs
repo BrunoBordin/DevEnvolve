@@ -62,7 +62,8 @@ namespace Api.DevEnvolve.Repository
                             estado = freelancer.endereco.estado,
                             cep = freelancer.endereco.cep,
                             logradouro = freelancer.endereco.logradouro,
-                            numero = freelancer.endereco.numero
+                            numero = freelancer.endereco.numero,
+                            bairro = freelancer.endereco.bairro
                         };
 
                         return usuarioToken;
