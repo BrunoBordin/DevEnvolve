@@ -42,4 +42,12 @@ namespace Api.DevEnvolve.Model
         public int idFreelancer { get; set; }
         public Freelancer freelancer { get; set; }
     }
+
+    public class Skill
+    {
+        [Key]
+        public int idSkillsFreelancer { get; set; }
+        public int idSkill { get; set; }
+        public int idFreelancer { get; set; }
+    }
 }

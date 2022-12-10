@@ -18,6 +18,14 @@ namespace Api.DevEnvolve.Controllers
             return Ok(freelancers);
         }
 
+        [HttpGet("SkillsFreelancers")]
+        public async Task<ActionResult> GetSkillsFreelancers()
+        {
+            int idFreelancer = User.Identity.GetPrestadorId();
+            var Skillsfreelancers = SkillsRepository.GetSkillsFreelancers(idFreelancer);
+            return Ok(Skillsfreelancers);
+        }
+
         [HttpGet("PesquisaDemanda")]
         public async Task<ActionResult<List<Demanda>>> GetDemandaByName(string nomeDemanda)
         {
