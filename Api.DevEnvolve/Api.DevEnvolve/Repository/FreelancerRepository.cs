@@ -59,14 +59,18 @@ namespace Api.DevEnvolve.Repository
                             email = freelancer.email,
                             senha = freelancer.senha,
                             descricao = freelancer.descricao,
-                            idEndereco = freelancer.endereco.idEndereco,
-                            cidade = freelancer.endereco.cidade,
-                            estado = freelancer.endereco.estado,
-                            cep = freelancer.endereco.cep,
-                            logradouro = freelancer.endereco.logradouro,
-                            numero = freelancer.endereco.numero,
-                            bairro = freelancer.endereco.bairro
+                            celular= freelancer.celular,
                         };
+                        if (freelancer.endereco != null)
+                        {
+                            usuarioToken.idEndereco = freelancer.endereco.idEndereco;
+                            usuarioToken.cidade = freelancer.endereco.cidade;
+                            usuarioToken.estado = freelancer.endereco.estado;
+                            usuarioToken.cep = freelancer.endereco.cep;
+                            usuarioToken.logradouro = freelancer.endereco.logradouro;
+                            usuarioToken.numero = freelancer.endereco.numero;
+                            usuarioToken.bairro = freelancer.endereco.bairro;
+                        }
 
                         return usuarioToken;
                     }
