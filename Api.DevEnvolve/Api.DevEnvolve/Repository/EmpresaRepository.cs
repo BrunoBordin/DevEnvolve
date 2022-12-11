@@ -125,16 +125,18 @@ namespace Api.DevEnvolve.Repository
                     var senhaCripto = encod.encodePlainPassword(encod.plainPassword(email, senha));
 
                     Empresa? empresa = dbContext.Empresa.AsQueryable().Where(x => x.email == email && x.senha == senhaCripto).FirstOrDefault();
-                    empresa.endereco = dbContext.EnderecoEmpresa.AsQueryable().Where(x => x.idEmpresa == empresa.idEmpresa).FirstOrDefault();
+
                     if (empresa != null)
                     {
+                        empresa.endereco = dbContext.EnderecoEmpresa.AsQueryable().Where(x => x.idEmpresa == empresa.idEmpresa).FirstOrDefault();
                         UsuarioToken usuarioToken = new UsuarioToken()
                         {
                             id = empresa.idEmpresa,
                             nome = empresa.nome,
                             email = empresa.email,
                             senha = empresa.senha,
-                            descricao = empresa.descricao
+                            descricao = empresa.descricao,
+                            celular= empresa.celular
                         };
                         if (empresa.endereco != null)
                         {
