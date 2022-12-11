@@ -157,7 +157,7 @@ namespace Api.DevEnvolve.Repository
             }
         }
 
-        public static void CadastraDemanda(Demanda demanda, int id)
+        public static Demanda CadastraDemanda(Demanda demanda, int id)
         {
             try
             {
@@ -169,6 +169,7 @@ namespace Api.DevEnvolve.Repository
                     demanda.nomeEmpresa = empresa.nome;
                     dbContext.Add(demanda);
                     dbContext.SaveChanges();
+                    return dbContext.Demanda.AsQueryable().Where(z => z.idDemanda == demanda.idDemanda).FirstOrDefault();
                 }
             }
             catch (Exception ex)
