@@ -161,7 +161,7 @@ namespace Api.DevEnvolve.Repository
                             nome= deman.nome,
                             stack= deman.stack,
                             valor = deman.preco,
-                            dataCandidatura = id.dataCandidatura,
+                            dataCandidatura = id.dataCandidatura.ToString("dd/MM/yyyy"),
                             descricao = deman.descricao
                         };
                         demandas.Add(demandaCandidato);
