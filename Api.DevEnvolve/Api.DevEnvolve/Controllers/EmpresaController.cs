@@ -42,7 +42,6 @@ namespace Api.DevEnvolve.Controllers
             return Ok();
         }
 
-
         [HttpPatch("SenhaEmpresa")]
         public async Task<IActionResult> Senha(string senha)
         {
@@ -69,11 +68,11 @@ namespace Api.DevEnvolve.Controllers
         }
 
         [HttpPost("CadastraDemanda")]
-        public async Task<IActionResult> CadastraDemanda([FromBody] Demanda demanda)
+        public async Task<ActionResult<Demanda>> CadastraDemanda([FromBody] Demanda demanda)
         {
             int id = User.Identity.GetPrestadorId();
-            EmpresaRepository.CadastraDemanda(demanda, id);
-            return Ok();
+            var Demanda = EmpresaRepository.CadastraDemanda(demanda, id);
+            return Ok(Demanda);
         }
     }
 }
