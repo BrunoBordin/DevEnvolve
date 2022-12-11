@@ -6,7 +6,7 @@
         public string nome { get; set; }
         public int stack { get; set; }
         public decimal valor { get; set; }
-        public DateTime dataCandidatura { get; set; }
+        public string dataCandidatura { get; set; }
         public string descricao { get; set; }
     }
 }
